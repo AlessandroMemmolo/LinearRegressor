@@ -10,11 +10,11 @@ def GradientDescend(fun,gradient,x0, tol, alpha, maxIter):
     gpath.append(gradient(x0))
     fpath = []
     fpath.append(fun(x0))
-    while np.norm(gradient(x0)) > tol and n < maxIter:
+    while np.linalg.norm(gradient(x0)) > tol and n < maxIter:
         x0 = x0 - alpha*gradient(x0)
         n = n+1
         xpath.append(x0)
         gpath.append(gradient(x0))
         fpath.append(fun(x0))
-    result = pd.DataFrame(data = [xpath,gpath,fpath], columns = ['x values', 'gradient values', 'function values'])
+    result = pd.DataFrame(data = {'x values' : xpath, 'gradient values': gpath, ' function values':fpath})
     return result
