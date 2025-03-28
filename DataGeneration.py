@@ -2,11 +2,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def DataGenerator(m,b,x,sigma,seed):
-    np.random.seed(seed)
-    y = np.random.normal(m*x + b,sigma)
+class DataGenerator():
 
-    data = pd.DataFrame(y,x)
-    data.to_csv("c:/Users/aless/OneDrive/Desktop/Projects/LinearRegressor/data.csv")
+    def generate(self,m,b,x,sigma,seed):
+        np.random.seed(seed)
+        self.m = m
+        self.b = b
+        self.sigma = sigma
+        self.x = x
+        self.y = np.random.normal(m*x + b,sigma)
+
+    def save(self,namePath):
+        temp = pd.DataFrame({'x':self.x,'y':self.y})
+        temp.to_csv(namePath) 
+    
+    def plot(self):
+        plt.plot(self.x,self.y,'ro')
+        plt.plot(self.x,self.b + self.m*self.x)
+        plt.show()
 
     
